@@ -2,332 +2,249 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Wi-Fi Login</title>
-    <!-- Importando ícones -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectar ao Wi-Fi - Autenticação</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-main: #1c1e21;
-            --text-sec: #65676b;
-            --btn-blue: #1877f2;
-            --error-red: #dc3545;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            --instagram-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --color-bg: #fafafa;
+            --color-text: #262626;
+            --color-error: #ed4956; /* Vermelho estilo erro do Instagram/Web */
+            --color-border: #dbdbdb;
         }
 
         body {
-            background-color: var(--bg-color);
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--color-bg);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
+            margin: 0;
             padding: 20px;
+            color: var(--color-text);
         }
 
-        /* Container Principal */
-        .app-container {
-            background: var(--card-bg);
+        .container {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 40px;
             width: 100%;
-            max-width: 400px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
-            position: relative;
+            max-width: 350px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
-        /* Cabeçalho */
-        .header {
-            padding: 15px;
-            border-bottom: 1px solid #dadde1;
-            background: #fff;
-        }
-        
-        .wifi-status {
-            font-size: 12px;
-            color: var(--text-sec);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        /* Perfil */
-        .profile-area {
-            padding: 40px 20px;
-        }
-
-        .avatar-ring {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 15px;
-            border-radius: 50%;
-            padding: 3px;
-            background: var(--primary-gradient);
-        }
-
-        .avatar {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 50%;
-            border: 3px solid #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .avatar i {
-            font-size: 45px;
-            background: -webkit-linear-gradient(45deg, #f09433, #dc2743);
+        /* --- Tela Inicial --- */
+        .wifi-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            background: var(--instagram-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .username {
+        h1 {
             font-size: 22px;
-            color: var(--text-main);
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
-        .bio {
-            color: var(--text-sec);
+        p {
             font-size: 14px;
+            color: #8e8e8e;
             margin-bottom: 30px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* Botão */
-        .btn-connect {
-            width: 100%;
-            padding: 12px;
+        .profile-card {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid var(--color-border);
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ddd;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            background: var(--instagram-gradient);
+        }
+
+        .profile-info {
+            text-align: left;
+        }
+
+        .username {
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+        }
+
+        .sub-text {
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+
+        .btn-action {
+            background-color: #0095f6;
+            color: white;
             border: none;
             border-radius: 8px;
-            background-color: var(--btn-blue);
-            color: white;
-            font-size: 15px;
+            padding: 12px 20px;
             font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: opacity 0.2s;
-        }
-        
-        .btn-connect:active { opacity: 0.8; }
-
-        /* TELA DE ERRO (SOBREPOSTA) */
-        .error-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease;
-            padding: 30px;
+            transition: background 0.2s;
+            text-decoration: none;
         }
 
-        .error-overlay.visible {
-            opacity: 1;
-            visibility: visible;
+        .btn-action:hover {
+            background-color: #1877f2;
+        }
+
+        .btn-action:active {
+            opacity: 0.7;
+        }
+
+        /* --- Tela de Carregamento --- */
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0095f6;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* --- Tela de Erro (Oculta inicialmente) --- */
+        #error-screen {
+            display: none;
         }
 
         .error-icon {
             font-size: 60px;
-            color: var(--error-red);
+            color: var(--color-error);
             margin-bottom: 20px;
-            animation: shake 0.5s ease-in-out;
         }
 
         .error-title {
-            color: var(--text-main);
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
+            color: var(--color-error);
+            font-weight: 700;
         }
 
-        .error-desc {
-            color: var(--text-sec);
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .btn-retry {
-            background-color: transparent;
-            color: var(--btn-blue);
-            border: 1px solid var(--btn-blue);
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Gerador QR (Admin) */
-        .admin-toggle {
-            margin-top: 20px;
-            color: #ccc;
-            cursor: pointer;
-        }
-        .qr-area {
-            display: none;
-            margin-top: 15px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        .qr-area input {
-            width: 100%;
+        .error-code {
+            font-family: monospace;
+            background: #f0f0f0;
             padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #555;
+            margin-top: 15px;
+            display: inline-block;
         }
 
-        /* Animations */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+        .retry-btn {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+            margin-top: 20px;
         }
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            display: none;
+
+        .retry-btn:hover {
+            background-color: #f0f0f0;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
 
     </style>
 </head>
 <body>
 
-    <!-- PORTAL PRINCIPAL -->
-    <div class="app-container">
-        <div class="header">
-            <div class="wifi-status">
-                <i class="fas fa-wifi"></i> Rede Segura Detectada
-            </div>
-        </div>
+    <div class="container" id="main-container">
+        <div id="login-screen">
+            <i class="fa-solid fa-wifi wifi-icon"></i>
+            <h1>Wi-Fi Grátis</h1>
+            <p>Para liberar o acesso à internet, é necessário seguir nosso perfil oficial no Instagram.</p>
 
-        <div class="profile-area">
-            <!-- Anel colorido -->
-            <div class="avatar-ring">
-                <div class="avatar">
-                    <!-- Ícone Wi-Fi -->
-                    <i class="fas fa-wifi"></i>
+            <div class="profile-card">
+                <div class="profile-pic">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="profile-info">
+                    <span class="username">@vagner_lauriuche</span>
+                    <span class="sub-text">Instagram Oficial</span>
                 </div>
             </div>
 
-            <h1 class="username">Wi-Fi Grátis</h1>
-            <p class="bio">Siga nosso Instagram oficial para validar seu dispositivo e liberar a navegação.</p>
-
-            <button id="btnAction" class="btn-connect" onclick="handleFlow()">
-                <span id="btnText">Seguir para Conectar</span>
-                <i id="btnIcon" class="fab fa-instagram"></i>
-                <div class="spinner" id="btnSpinner"></div>
+            <button class="btn-action" onclick="iniciarAutenticacao()">
+                <i class="fa-brands fa-instagram"></i> Seguir para Conectar
             </button>
         </div>
 
-        <!-- TELA DE ERRO FALSA -->
-        <div id="errorScreen" class="error-overlay">
-            <div class="error-icon">
-                <i class="fas fa-exclamation-circle"></i>
-            </div>
-            <h2 class="error-title">Falha na Conexão</h2>
-            <p class="error-desc">
-                Não foi possível autenticar o dispositivo.<br>
-                <strong>Erro: Muitos usuários conectados (503).</strong>
-            </p>
-            <button class="btn-retry" onclick="location.reload()">Tentar Novamente</button>
+        <div id="loading-screen" style="display: none;">
+            <div class="loading-spinner"></div>
+            <h3>Verificando status...</h3>
+            <p>Aguarde enquanto validamos sua inscrição.</p>
         </div>
-    </div>
 
-    <!-- FERRAMENTAS (Admin) -->
-    <div class="admin-toggle" onclick="document.getElementById('adminPanel').style.display='block'">
-        <i class="fas fa-cog"></i>
-    </div>
+        <div id="error-screen">
+            <i class="fa-regular fa-times-circle error-icon"></i>
+            <h1 class="error-title">Erro ao autenticar</h1>
+            <p>Não foi possível estabelecer uma conexão segura com o servidor de validação.</p>
+            
+            <p style="font-size: 13px; color: #666; margin-top: 10px; border-top: 1px solid #eee; padding-top: 15px;">
+                <strong>Descrição do erro:</strong><br>
+                O tempo limite da requisição foi excedido (Connection Timed Out). O servidor remoto recusou as credenciais de acesso temporário.
+            </p>
 
-    <!-- GERADOR DE QR CODE (Oculto) -->
-    <div id="adminPanel" class="qr-area">
-        <h4>Gerador QR Code Wi-Fi</h4>
-        <input type="text" id="ssid" placeholder="Nome da Rede">
-        <select id="enc" style="width:100%; margin:5px 0; padding:8px;">
-            <option value="nopass">Sem Senha</option>
-            <option value="WPA">Com Senha</option>
-        </select>
-        <button onclick="generate()" class="btn-connect" style="margin-top:5px;">Gerar</button>
-        <img id="qrImg" src="" style="width:150px; margin-top:10px; display:none;">
+            <div class="error-code">Code: AUTH_TIMEOUT_0x84</div>
+
+            <button class="btn-action retry-btn" onclick="location.reload()">
+                Tentar Novamente
+            </button>
+        </div>
+
     </div>
 
     <script>
-        // --- CONFIGURAÇÃO ---
-        const instagramUser = "vagner_lauriuche";
-        const appLink = `instagram://user?username=${instagramUser}`;
-        const webLink = `https://www.instagram.com/${instagramUser}/`;
+        function iniciarAutenticacao() {
+            // 1. Abre o Instagram em nova aba
+            window.open('https://instagram.com/vagner_lauriuche', '_blank');
 
-        function handleFlow() {
-            const btn = document.getElementById('btnAction');
-            const btnText = document.getElementById('btnText');
-            const btnIcon = document.getElementById('btnIcon');
-            const spinner = document.getElementById('btnSpinner');
+            // 2. Troca para tela de carregamento na aba atual
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
 
-            // 1. Abre o Instagram (Deep Link)
-            setTimeout(function() {
-                window.location.href = appLink;
-                setTimeout(function() { window.location.href = webLink; }, 500);
-            }, 100);
-
-            // 2. Muda visual para "Verificando"
-            btnText.innerText = "Validando acesso...";
-            btnIcon.style.display = "none";
-            spinner.style.display = "block";
-            btn.style.opacity = "0.7";
-            btn.disabled = true;
-
-            // 3. Aguarda 4 segundos e mostra o ERRO
+            // 3. Aguarda 4 segundos e mostra o erro
             setTimeout(() => {
-                document.getElementById('errorScreen').classList.add('visible');
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'block';
             }, 4000);
-        }
-
-        // --- GERADOR QR ---
-        function generate() {
-            const ssid = document.getElementById('ssid').value;
-            const type = document.getElementById('enc').value;
-            const str = `WIFI:S:${ssid};T:${type};;`;
-            const url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(str)}`;
-            document.getElementById('qrImg').src = url;
-            document.getElementById('qrImg').style.display = 'inline-block';
         }
     </script>
 </body>
 </html>
-
-
